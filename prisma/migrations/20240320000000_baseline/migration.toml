@@ -1,0 +1,11 @@
+# This is a baseline migration that matches the current state of the database
+# It includes all tables from both auth and public schemas
+# This migration should not be applied as the tables already exist
+# It is used to establish the baseline for future migrations
+
+# The migration is marked as applied to prevent Prisma from trying to apply it
+# This is necessary because we're working with an existing database
+# that already has these tables and schemas set up
+
+# This is a special case for working with existing databases
+# where we want to establish a baseline without modifying the database 
