@@ -1,31 +1,13 @@
 <script setup lang="ts">
-import { PrismaClient } from '@prisma/client'
-
-const prisma = new PrismaClient()
 const searchQuery = ref('')
 const selectedCategory = ref('')
 
-const { data: posts } = await useAsyncData('posts', async () => {
-  return await prisma.posts.findMany({
-    where: {
-      published: true
-    },
-    include: {
-      author: true,
-      category: true
-    },
-    orderBy: {
-      created_at: 'desc'
-    }
-  })
+const { data: posts, error: postsError } = await useFetch('/api/posts', {
+  method: 'GET'
 })
 
-const { data: categories } = await useAsyncData('categories', async () => {
-  return await prisma.categories.findMany({
-    orderBy: {
-      name: 'asc'
-    }
-  })
+const { data: categories, error: categoriesError } = await useFetch('/api/categories', {
+  method: 'GET'
 })
 
 const filteredPosts = computed(() => {

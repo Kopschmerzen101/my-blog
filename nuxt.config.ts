@@ -4,25 +4,27 @@ export default defineNuxtConfig({
 
   modules: [
     '@nuxtjs/tailwindcss',
-    '@nuxt/content',
-    '@nuxtjs/supabase'
+    '@nuxt/content'
   ],
 
-  supabase: {
-    redirect: false,
-    url: process.env.SUPABASE_URL,
-    key: process.env.SUPABASE_KEY
-  },
-
   content: {
+    documentDriven: true,
     highlight: {
-      theme: 'github-dark'
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark'
+      }
+    },
+    markdown: {
+      toc: { depth: 3, searchDepth: 3 },
+      remarkPlugins: [],
+      rehypePlugins: []
+    },
+    navigation: {
+      fields: ['navTitle']
     }
   },
 
-  nitro: {
-    plugins: ['~/server/trpc.ts']
-  },
 
   compatibilityDate: '2025-03-24'
 })
